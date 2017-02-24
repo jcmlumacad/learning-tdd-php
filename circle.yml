@@ -1,8 +1,17 @@
 machine:
   php:
-    version: 5.6
+    version: 5.5.9
+dependencies:
+  override:
+    - cp .env.circleci .env
+    - composer install --dev --prefer-source --no-interaction
+    - chmod -R 777 storage
+    - php artisan key:generate
+database:
+  override:
+    - mysql -e "create database IF NOT EXISTS circle_test;" -uubuntu
+    - php artisan migrate --no-interaction -vvv
 test:
-  pre:
-    - composer install
   override:
     - phpunit
+    - mysql -e "drop database circle_test;" -uubuntu
