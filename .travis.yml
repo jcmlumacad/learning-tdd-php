@@ -2,7 +2,14 @@ sudo: required
 language: php
 php:
   - 5.6
+before_install:
+  - composer install --dev --prefer-source --no-interaction
 before_script:
-  - composer install
+  - cp .env.circleci .env
+  - chmod -R 777 storage
+  - touch database/database.sqlite
+  - php artisan key:generate
+  - php artisan migrate --no-interaction -vvv
 script:
   - phpunit
+  - rm database/database.sqlite

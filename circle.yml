@@ -9,9 +9,9 @@ dependencies:
     - php artisan key:generate
 database:
   override:
-    - mysql -e "create database IF NOT EXISTS circle_test;" -uubuntu
+    - touch database/database.sqlite
     - php artisan migrate --no-interaction -vvv
 test:
   override:
     - phpunit
-    - mysql -e "drop database circle_test;" -uubuntu
+    - rm database/database.sqlite
