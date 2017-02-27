@@ -27,8 +27,6 @@ class ResetPasswordTest extends TestCase
             ->click('Forgot Your Password?')
             ->seePageIs('/password/reset')
             ->see('Reset Password');
-            //
-            //
     }
 
     public function testSendPasswordResetLink()
