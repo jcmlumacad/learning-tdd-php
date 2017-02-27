@@ -24,7 +24,8 @@ class LoginTest extends TestCase
             ->check('remember')
             ->press('Login')
             ->seePageIs('/home')
-            ->see('Dashboard');
+            ->see('Dashboard')
+            ->seeIsAuthenticated();
     }
 
     public function testLoginWithWrongCredentials()
@@ -36,6 +37,7 @@ class LoginTest extends TestCase
             ->check('remember')
             ->press('Login')
             ->seePageIs('/login')
-            ->see('These credentials do not match our records');
+            ->see('These credentials do not match our records')
+            ->dontSeeIsAuthenticated();
     }
 }
