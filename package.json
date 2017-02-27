@@ -1,6 +1,9 @@
 {
   "private": true,
   "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-phpunit": "^0.3.6",
     "gulp": "^3.8.8"
   },
   "dependencies": {
