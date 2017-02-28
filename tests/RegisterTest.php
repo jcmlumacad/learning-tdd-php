@@ -205,7 +205,7 @@ class RegisterTest extends TestCase
             ->see('The password field is required.');
     }
 
-    public function testPasswordMustMatchToConfirmationPassword()
+    public function testPasswordMustNotMatchToConfirmationPassword()
     {
         $this->visit('/register')
             ->see('Register')
