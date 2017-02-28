@@ -9,18 +9,25 @@ class LoginTest extends TestCase
 {
     use DatabaseTransactions;
 
+    public function __construct()
+    {
+        $this->name = 'John Doe';
+        $this->email = 'john@doe.com';
+        $this->password = '123456';
+    }
+
     public function testLoginWithCorrectCredentials()
     {
         factory(User::class)->create([
-            'name' => 'John Doe',
-            'email' => 'john@doe.com',
-            'password' => bcrypt('123456')
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => bcrypt($this->password)
         ]);
 
         $this->visit('/login')
             ->see('Login')
-            ->type('john@doe.com', 'email')
-            ->type('123456', 'password')
+            ->type($this->email, 'email')
+            ->type($this->password, 'password')
             ->check('remember')
             ->press('Login')
             ->seePageIs('/home')
@@ -32,7 +39,7 @@ class LoginTest extends TestCase
     {
         $this->visit('/login')
             ->see('Login')
-            ->type('john@doe.com', 'email')
+            ->type($this->email, 'email')
             ->type('invalid-password', 'password')
             ->check('remember')
             ->press('Login')

@@ -191,7 +191,8 @@ class RegisterTest extends TestCase
             ->type($this->confirmPassword, 'password_confirmation')
             ->press('Register')
             ->seePageIs('/home')
-            ->see('Dashboard');
+            ->see('Dashboard')
+            ->seeIsAuthenticated();
     }
 
     public function testRegisterWithoutInputs()
