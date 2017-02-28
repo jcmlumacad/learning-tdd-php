@@ -191,7 +191,8 @@ class RegisterTest extends TestCase
             ->type($this->confirmPassword, 'password_confirmation')
             ->press('Register')
             ->seePageIs('/home')
-            ->see('Dashboard');
+            ->see('Dashboard')
+            ->seeIsAuthenticated();
     }
 
     public function testRegisterWithoutInputs()
@@ -205,7 +206,7 @@ class RegisterTest extends TestCase
             ->see('The password field is required.');
     }
 
-    public function testPasswordMustMatchToConfirmationPassword()
+    public function testPasswordMustNotMatchToConfirmationPassword()
     {
         $this->visit('/register')
             ->see('Register')
